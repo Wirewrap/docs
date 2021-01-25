@@ -10,13 +10,10 @@ To use it you must [compile your build](Compile-your-build). Add the following t
 #define USE_TASMOTA_CLIENT    // Enable the driver
 #endif
 
-#ifndef USE_TASMOTA_CLIENT_FLASH_SPEED
-#define USE_TASMOTA_CLIENT_FLASH_SPEED 57600    // Configure the baud rate of the bootloader
-#endif
-
-#ifndef USE_TASMOTA_CLIENT_SERIAL_SPEED 57600  
-#define USE_TASMOTA_CLIENT_SERIAL_SPEED 57600    // Configure the baud rate at which the client microcontroller will be interfacing to Tasmota
-#endif
+#undef USE_TASMOTA_CLIENT_FLASH_SPEED
+#define USE_TASMOTA_CLIENT_FLASH_SPEED 115200 // Configure the baud rate of the bootloader
+#undef USE_TASMOTA_CLIENT_SERIAL_SPEED 
+#define USE_TASMOTA_CLIENT_SERIAL_SPEED 115200 // Configure the baud rate at which the client microcontroller will be interfacing to Tasmota
 ```
 
 Please note that the `USE_TASMOTA_CLIENT_FLASH_SPEED` will depend on the variant of Arduino Uno/Mini/Nano board you are using - The general observation is that the 3.3V devices usually run at 57600 whereas the 5V devices usually run on 115200 but this is provided for guidance only as it has been found that some boards will not necessarily adhere to this. The main driving factor behind the baud rate is the crystal oscillator on the board which is usually 8Mhz for 3.3V variants and 16Mhz for 5V variants - hence 57600 being 1/2 of 115200.
